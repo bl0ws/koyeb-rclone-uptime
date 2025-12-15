@@ -1,12 +1,12 @@
 #!/bin/sh
 
-# 定义变量
+# Define variables
 RCLONE_CONFIG=/app/data/rclone.conf
 DB_PATH=/app/data/kuma.db
 BACKUP_PATH=/app/data/kuma_backup.db
 REMOTE_PATH=r2:/$BUCKET/kuma/kuma_backup.db
 
-#创建rclone 配置文件
+#Create rclone configuration file
 cat > $RCLONE_CONFIG<< EOF
 [r2]
 type = s3
@@ -18,29 +18,29 @@ endpoint = ${ENDPOINT}
 EOF
 
 
-# 检查是否存在备份
+# Check if backup exists
 if rclone --config $RCLONE_CONFIG ls $REMOTE_PATH; then
-    # 如果存在备份，则恢复
+    # Restore if backup exists
     echo "Restoring database from backup..."
     rclone --config $RCLONE_CONFIG copyto $REMOTE_PATH $DB_PATH
 fi
 
-# 等待数据还原完成
+# Wait for data restoration to complete
 # sleep 30
 
-# 运行 Uptime Kuma
+# run Uptime Kuma
 echo "Starting Uptime Kuma..."
 npm start &
 
-# 等待 Uptime Kuma 启动
+# Wait Uptime Kuma 启动
 sleep 60
 
-# 每隔15分钟备份数据库
+# Back up the database every 15 minutes
 while true; do
     echo "Attempting to backup database..."
-    # 创建数据库的备份
+    # Create a backup of the database
     sqlite3 $DB_PATH ".backup \"$BACKUP_PATH\""
-    # 同步备份文件到远程存储
+    # Synchronize backup files to remote storage
     echo "Backing up database..."
     rclone --config $RCLONE_CONFIG copyto $BACKUP_PATH $REMOTE_PATH
     echo "backup finish"
