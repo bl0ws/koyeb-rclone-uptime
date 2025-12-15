@@ -6,7 +6,7 @@ WORKDIR /app
 RUN mkdir -p /app/data
 
 # Set timezone
-ENV TZ=Asia/Shanghai
+ENV TZ=Asia/Jakarta
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install rclone
