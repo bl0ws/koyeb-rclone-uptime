@@ -35,7 +35,7 @@ npm start &
 # Wait Uptime Kuma start up
 sleep 60
 
-# Back up the database every 1 hour
+# Back up the database every day
 while true; do
     echo "Attempting to backup database..."
     # Create a backup of the database
@@ -44,5 +44,5 @@ while true; do
     echo "Backing up database..."
     rclone --config $RCLONE_CONFIG copyto $BACKUP_PATH $REMOTE_PATH
     echo "backup finish"
-    sleep 3600
+    sleep 86400
 done
