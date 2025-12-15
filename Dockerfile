@@ -1,4 +1,4 @@
-# Main image
+# Main image to stable build 2.0.2
 FROM docker.io/louislam/uptime-kuma:2.0.2 as KUMA
 
 ARG UPTIME_KUMA_PORT=3001
