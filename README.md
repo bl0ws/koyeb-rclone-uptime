@@ -1,12 +1,12 @@
-# koyeb-rclone-uptime
+# koyeb-rclone-uptime translated
 free uptime kuma in koyeb with S3 storage backup. 
 
 
-## 环境变量
-S3 对象储存桶：
+## Environment Variables
+S3 Object Bucket：
 ```
-ACCESS_ID               //id
-ACCESS_SECRET_KEY        //密钥
-ENDPOINT                 //
-BUCKET                  //桶名
+ACCESS_ID               //keyid
+ACCESS_SECRET_KEY        //applicationkey
+ENDPOINT                 //bucket url
+BUCKET                  //bucket name
 ```
