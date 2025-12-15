@@ -1,5 +1,5 @@
 # Main image
-FROM docker.io/louislam/uptime-kuma:latest as KUMA
+FROM docker.io/louislam/uptime-kuma:2.0.2 as KUMA
 
 ARG UPTIME_KUMA_PORT=3001
 WORKDIR /app
