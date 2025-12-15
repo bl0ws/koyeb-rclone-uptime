@@ -32,10 +32,10 @@ fi
 echo "Starting Uptime Kuma..."
 npm start &
 
-# Wait Uptime Kuma 启动
+# Wait Uptime Kuma start up
 sleep 60
 
-# Back up the database every 15 minutes
+# Back up the database every 1 hour
 while true; do
     echo "Attempting to backup database..."
     # Create a backup of the database
@@ -44,5 +44,5 @@ while true; do
     echo "Backing up database..."
     rclone --config $RCLONE_CONFIG copyto $BACKUP_PATH $REMOTE_PATH
     echo "backup finish"
-    sleep 900
+    sleep 3600
 done
