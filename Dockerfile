@@ -7,10 +7,10 @@ RUN mkdir -p /app/data
 ENV TZ=Asia/Jakarta
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update && apt-get install -y unzip && \
-    curl https://rclone.org/install.sh | bash
+# Install restic (incremental backup, replaces rclone)
+RUN apt-get update && apt-get install -y restic && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY rclone.conf /app/data/rclone.conf
 COPY run.sh /usr/local/bin/run.sh
 RUN chmod +x /usr/local/bin/run.sh
 
